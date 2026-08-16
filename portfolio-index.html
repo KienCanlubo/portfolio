@@ -112,27 +112,25 @@
     padding:10px 28px; margin-top:22px; border-radius:6px; border:2px solid crimson; transition:all 0.3s ease, transform 0.25s ease;
   }
   .about .about-content .right a:hover{ color:crimson; background:none; transform:translateY(-3px); }
-  .about .about-content .right .about-highlights{ display:flex; flex-wrap:wrap; align-items:center; gap:14px; margin:22px 0 26px; }
-  .about .about-content .right .highlight-group{ display:flex; flex-wrap:wrap; gap:10px; }
-  .about .about-content .right .highlight-divider{ width:1px; height:22px; background:#ddd; flex-shrink:0; }
-  .about .about-content .right .about-highlights span{
+  .about .about-content .right .about-highlights{ display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px; margin:22px 0 26px; }
+  .about .about-content .right .about-highlights span:not(.highlight-divider){
     display:inline-flex; align-items:center; gap:8px; font-size:13.5px; font-weight:500; font-family:'Ubuntu',sans-serif;
     background:#f1f1f1; color:#333; padding:9px 18px; border-radius:20px; transition:all 0.3s ease; white-space:nowrap;
   }
   .about .about-content .right .about-highlights span i{
     color:crimson; font-size:14px; width:14px; text-align:center; line-height:1; transition:color 0.3s ease;
   }
-  .about .about-content .right .about-highlights span:hover{ background:crimson; color:#fff; transform:translateY(-2px); }
-  .about .about-content .right .about-highlights span:hover i{ color:#fff; }
+  .about .about-content .right .about-highlights span:not(.highlight-divider):hover{ background:crimson; color:#fff; transform:translateY(-2px); }
+  .about .about-content .right .about-highlights span:not(.highlight-divider):hover i{ color:#fff; }
+  .about .about-content .right .about-highlights .highlight-divider{ width:1px; height:22px; background:#ddd; flex-shrink:0; align-self:center; }
   .about .about-content .right .about-highlights .badge-edu{
     background:rgba(220,20,60,0.08); color:crimson; border:1px solid rgba(220,20,60,0.25); font-weight:600;
   }
   .about .about-content .right .about-highlights .badge-edu:hover{ background:crimson; color:#fff; }
   @media (max-width: 480px){
     .about .about-content .right .about-highlights{ gap:10px; }
-    .about .about-content .right .highlight-divider{ display:none; }
-    .about .about-content .right .highlight-group{ display:grid; grid-template-columns:1fr 1fr; gap:10px; width:100%; }
-    .about .about-content .right .about-highlights span{ justify-content:center; white-space:normal; text-align:center; }
+    .about .about-content .right .about-highlights .highlight-divider{ display:none; }
+    .about .about-content .right .about-highlights span:not(.highlight-divider){ justify-content:center; white-space:normal; text-align:center; flex:1 1 calc(50% - 5px); }
   }
 
   /* ---------------- SERVICES ---------------- */
@@ -417,7 +415,7 @@
   html[data-theme="dark"] section .title::after{ background:#0b0b0d; }
   html[data-theme="dark"] .about .about-content .right .text{ color:#f0f0f0; }
   html[data-theme="dark"] .about .about-content .right p{ color:#cfcfcf; }
-  html[data-theme="dark"] .about .about-content .right .about-highlights span{ background:#1d1d1d; color:#ddd; }
+  html[data-theme="dark"] .about .about-content .right .about-highlights span:not(.highlight-divider){ background:#1d1d1d; color:#ddd; }
   html[data-theme="dark"] .about .about-content .right .highlight-divider{ background:#333; }
   html[data-theme="dark"] .about .about-content .right .about-highlights .badge-edu{
     background:rgba(220,20,60,0.15); color:#ff6b81; border:1px solid rgba(220,20,60,0.35);
@@ -543,15 +541,11 @@
           <p>I'm a BS Information Technology graduate from STI College Santa Rosa (2022–2026), focused on software and web development. I like taking real, unstructured problems — a business still tracked on paper, a process running on spreadsheets — and turning them into organized, database-driven systems people can actually rely on day to day.</p>
           <p>Beyond coursework, my OJT experience gave me hands-on exposure to real workplace processes, documentation, and problem-solving under practical constraints — not just theory.</p>
           <div class="about-highlights">
-            <div class="highlight-group">
-              <span class="badge-edu"><i class="fas fa-graduation-cap"></i>BS Information Technology</span>
-            </div>
+            <span class="badge-edu"><i class="fas fa-graduation-cap"></i>BS Information Technology</span>
             <span class="highlight-divider"></span>
-            <div class="highlight-group">
-              <span><i class="fas fa-laptop-code"></i>Software &amp; Web Development</span>
-              <span><i class="fas fa-database"></i>Database-Driven Applications</span>
-              <span><i class="fas fa-puzzle-piece"></i>Problem Solving</span>
-            </div>
+            <span><i class="fas fa-laptop-code"></i>Software &amp; Web Development</span>
+            <span><i class="fas fa-database"></i>Database-Driven Applications</span>
+            <span><i class="fas fa-puzzle-piece"></i>Problem Solving</span>
           </div>
           <a href="Resume-KienCanlubo.pdf" target="_blank" rel="noopener">View Resume</a>
         </div>
