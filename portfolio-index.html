@@ -149,7 +149,7 @@
   .projects .proj-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:24px; }
   .projects .card{
     background:#1d1d1d; border-radius:6px; padding:30px 26px; text-align:left; overflow:hidden;
-    transition:all 0.3s ease; display:flex; flex-direction:column; height:100%;
+    transition:all 0.3s ease; display:flex; flex-direction:column; min-height:460px;
   }
   .projects .card:hover{ background:crimson; }
   .projects .card .proj-preview{
@@ -179,6 +179,22 @@
   .projects .card .proj-links{ display:flex; gap:14px; margin-top:auto; }
   .projects .card .proj-links a{ color:#fff; font-size:13px; font-family:'Ubuntu',sans-serif; border-bottom:1px solid transparent; }
   .projects .card .proj-links a:hover{ border-bottom-color:#fff; }
+
+  .projects .card.featured{
+    grid-column:1 / -1; flex-direction:row; align-items:stretch; gap:32px; padding:34px; position:relative;
+  }
+  .projects .card.featured .proj-preview{ width:44%; height:auto; margin-bottom:0; flex-shrink:0; }
+  .projects .card.featured .content{ display:flex; flex-direction:column; flex:1; min-width:0; }
+  .projects .card.featured .badge{
+    position:absolute; top:0; right:0; background:crimson; color:#fff; font-family:'Ubuntu',sans-serif;
+    font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase;
+    padding:7px 18px; border-radius:0 6px 0 10px; transition:all 0.3s ease;
+  }
+  .projects .card.featured:hover .badge{ background:#fff; color:crimson; }
+  @media (max-width:800px){
+    .projects .card.featured{ flex-direction:column; height:auto; }
+    .projects .card.featured .proj-preview{ width:100%; height:190px; }
+  }
 
   /* ---------------- CONTACT ---------------- */
   .contact .title::after{ content:"get in touch"; }
@@ -437,15 +453,18 @@
       <h2 class="title">My projects</h2>
       <div class="proj-grid">
 
-        <div class="card">
+        <div class="card featured">
           <div class="proj-preview"><img src="https://image.thum.io/get/width/900/crop/560/noanimate/https://free-shelf.vercel.app/" alt="Free.Shelf preview" loading="lazy"></div>
-          <span class="status">Shipped</span>
-          <div class="text">Free.Shelf</div>
-          <p>A free-games tracker that pulls this week's markdowns from Steam and Epic Games into one shelf — filter by store, sort newest/oldest/A→Z, with a live backend proxy and a sample-data fallback.</p>
-          <div class="tags"><span>JavaScript</span><span>Node.js</span><span>HTML/CSS</span></div>
-          <div class="proj-links">
-            <a href="https://free-shelf.vercel.app/" target="_blank" rel="noopener">Visit site ↗</a>
-            <a href="https://github.com/KienCanlubo/FreeShelf" target="_blank" rel="noopener">GitHub ↗</a>
+          <div class="content">
+            <span class="badge">Featured</span>
+            <span class="status">Shipped</span>
+            <div class="text">Free.Shelf</div>
+            <p>A free-games tracker that pulls this week's markdowns from Steam and Epic Games into one shelf — filter by store, sort newest/oldest/A→Z, with a live backend proxy and a sample-data fallback.</p>
+            <div class="tags"><span>JavaScript</span><span>Node.js</span><span>HTML/CSS</span></div>
+            <div class="proj-links">
+              <a href="https://free-shelf.vercel.app/" target="_blank" rel="noopener">Visit site ↗</a>
+              <a href="https://github.com/KienCanlubo/FreeShelf" target="_blank" rel="noopener">GitHub ↗</a>
+            </div>
           </div>
         </div>
 
