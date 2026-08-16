@@ -246,6 +246,43 @@
   footer span a{ color:crimson; }
   footer span a:hover{ text-decoration:underline; }
 
+  /* ---------------- THEME TOGGLE ---------------- */
+  .theme-toggle{
+    display:flex; align-items:center; justify-content:center; width:38px; height:38px;
+    border-radius:50%; border:1.5px solid rgba(255,255,255,0.4); background:none; color:#fff;
+    cursor:pointer; margin-left:25px; font-size:15px; transition:all 0.3s ease; flex-shrink:0;
+  }
+  .theme-toggle:hover{ border-color:#fff; color:crimson; background:#fff; }
+  .navbar.sticky .theme-toggle{ border-color:rgba(255,255,255,0.6); }
+
+  html[data-theme="dark"] body{ background:#0b0b0d; }
+  html[data-theme="dark"] section .title{ color:#f0f0f0; }
+  html[data-theme="dark"] section .title::before{ background:#f0f0f0; }
+  html[data-theme="dark"] section .title::after{ background:#0b0b0d; }
+  html[data-theme="dark"] .about .about-content .right .text{ color:#f0f0f0; }
+  html[data-theme="dark"] .about .about-content .right p{ color:#cfcfcf; }
+  html[data-theme="dark"] .about .about-content .left .photo-box{ background:#000; }
+  html[data-theme="dark"] .skills .skills-content .left .text{ color:#f0f0f0; }
+  html[data-theme="dark"] .skills .skills-content .left p{ color:#cfcfcf; }
+  html[data-theme="dark"] .skills .skills-content .left .stack-tags span{ background:#1d1d1d; color:#ddd; }
+  html[data-theme="dark"] .skills .skills-content .right span{ color:#f0f0f0; }
+  html[data-theme="dark"] .skills .skills-content .right .line{ background:#2a2a2a; }
+  html[data-theme="dark"] .contact .contact-content .text{ color:#f0f0f0; }
+  html[data-theme="dark"] .contact .contact-content .left p{ color:#cfcfcf; }
+  html[data-theme="dark"] .contact .contact-content .info .head{ color:#f0f0f0; }
+  html[data-theme="dark"] .contact .contact-content .info .sub-title{ color:#aaa; }
+  html[data-theme="dark"] .contact .right form .field input,
+  html[data-theme="dark"] .contact .right form .textarea textarea{
+    background:#1d1d1d; color:#eee; border-color:#333;
+  }
+  html[data-theme="dark"] .contact .right form .field input::placeholder,
+  html[data-theme="dark"] .contact .right form .textarea textarea::placeholder{ color:#888; }
+  html[data-theme="dark"] .modal-box{ background:#1d1d1d; }
+  html[data-theme="dark"] .modal-box h3{ color:#f0f0f0; }
+  html[data-theme="dark"] .modal-box p{ color:#bbb; }
+  html[data-theme="dark"] .modal-close{ color:#999; }
+  html[data-theme="dark"] .modal-close:hover{ color:#fff; }
+
   /* ---------------- RESPONSIVE ---------------- */
   @media (max-width:1104px){
     .about .about-content .left .photo-box{ height:330px; width:330px; }
@@ -299,6 +336,7 @@
         <li><a href="#projects" class="menu-link">Projects</a></li>
         <li><a href="#contact" class="menu-link">Contact</a></li>
       </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
       <div class="menu-icon" id="menuIcon"><i class="fas fa-bars"></i></div>
     </div>
   </nav>
@@ -515,6 +553,20 @@
     if(window.scrollY > 500){ scrollUpBtn.classList.add('show'); } else { scrollUpBtn.classList.remove('show'); }
   });
   scrollUpBtn.addEventListener('click', () => window.scrollTo({ top:0, behavior: reduced ? 'auto' : 'smooth' }));
+
+  // theme toggle (light/dark mode)
+  const htmlEl = document.documentElement;
+  const themeToggle = document.getElementById('themeToggle');
+  function applyTheme(theme){
+    htmlEl.setAttribute('data-theme', theme);
+    themeToggle.querySelector('i').className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+  }
+  applyTheme(localStorage.getItem('theme') || 'light');
+  themeToggle.addEventListener('click', () => {
+    const next = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    localStorage.setItem('theme', next);
+  });
 
   // mobile menu toggle
   const menuIcon = document.getElementById('menuIcon');
