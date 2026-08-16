@@ -146,17 +146,18 @@
   .projects{ color:#fff; background:#111; }
   .projects .title::before{ background:#fff; }
   .projects .title::after{ background:#111; content:"what i've built"; }
-  .projects .proj-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:24px; }
+  .projects .proj-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:24px; }
   .projects .card{
     background:#1d1d1d; border-radius:6px; padding:30px 26px; text-align:left; overflow:hidden;
-    transition:all 0.3s ease; display:flex; flex-direction:column; min-height:460px;
+    transition:all 0.3s ease; display:flex; flex-direction:column;
   }
   .projects .card:hover{ background:crimson; }
+  .projects .card .content{ display:flex; flex-direction:column; flex:1; min-height:0; }
   .projects .card .proj-preview{
-    width:100%; height:190px; border-radius:6px; overflow:hidden; margin-bottom:18px;
+    width:100%; aspect-ratio:16/9; border-radius:6px; overflow:hidden; margin-bottom:18px;
     background:#111; flex-shrink:0;
   }
-  .projects .card .proj-preview img{ height:100%; width:100%; object-fit:cover; object-position:left top; display:block; }
+  .projects .card .proj-preview img{ height:100%; width:100%; object-fit:cover; object-position:top; display:block; }
   .projects .card .proj-preview.empty{
     display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
     border:1.5px dashed #444; background:transparent; color:#666;
@@ -171,7 +172,7 @@
   }
   .projects .card:hover .status{ color:#fff; border-color:#fff; background:rgba(255,255,255,0.15); }
   .projects .card .text{ font-size:21px; font-weight:600; margin-bottom:8px; }
-  .projects .card p{ color:#bbb; font-size:13.5px; line-height:1.65; flex-grow:1; transition:color 0.3s ease; }
+  .projects .card p{ color:#bbb; font-size:13.5px; line-height:1.65; transition:color 0.3s ease; }
   .projects .card:hover p{ color:#f4d5dc; }
   .projects .card .tags{ display:flex; flex-wrap:wrap; gap:6px; margin:16px 0; }
   .projects .card .tags span{ font-size:10.5px; font-family:'Ubuntu',sans-serif; background:#111; color:#ccc; padding:4px 9px; border-radius:4px; }
@@ -181,24 +182,24 @@
   .projects .card .proj-links a:hover{ border-bottom-color:#fff; }
 
   .projects .card.featured{
-    grid-column:1 / -1; flex-direction:row; align-items:center; gap:36px; padding:34px;
-    position:relative; min-height:0; height:auto;
+    grid-column:1 / -1; flex-direction:row; align-items:center; gap:36px; padding:30px 34px;
+    position:relative; min-height:350px; max-height:380px;
   }
   .projects .card.featured .proj-preview{
-    width:44%; aspect-ratio:900/560; height:auto; margin-bottom:0; flex-shrink:0;
+    width:50%; aspect-ratio:16/9; margin-bottom:0; flex-shrink:0;
   }
-  .projects .card.featured .content{ display:flex; flex-direction:column; flex:1; min-width:0; }
-  .projects .card.featured .content p{ flex-grow:0; }
+  .projects .card.featured .content{ width:50%; flex:none; display:flex; flex-direction:column; justify-content:center; min-width:0; }
   .projects .card.featured .content .proj-links{ margin-top:24px; }
   .projects .card.featured .badge{
     position:absolute; top:0; right:0; background:crimson; color:#fff; font-family:'Ubuntu',sans-serif;
     font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase;
-    padding:7px 18px; border-radius:0 6px 0 10px; transition:all 0.3s ease;
+    padding:7px 18px; border-radius:0 6px 0 10px; transition:all 0.3s ease; z-index:1;
   }
   .projects .card.featured:hover .badge{ background:#fff; color:crimson; }
   @media (max-width:800px){
-    .projects .card.featured{ flex-direction:column; height:auto; align-items:stretch; }
-    .projects .card.featured .proj-preview{ width:100%; aspect-ratio:auto; height:190px; }
+    .projects .proj-grid{ grid-template-columns:1fr; }
+    .projects .card.featured{ flex-direction:column; align-items:stretch; height:auto; min-height:0; max-height:none; }
+    .projects .card.featured .proj-preview, .projects .card.featured .content{ width:100%; }
   }
 
   /* ---------------- CONTACT ---------------- */
@@ -459,7 +460,7 @@
       <div class="proj-grid">
 
         <div class="card featured">
-          <div class="proj-preview"><img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Ffree-shelf.vercel.app%2F?w=900&amp;h=560" alt="Free.Shelf preview" loading="lazy" onerror="var c=this.closest('.proj-preview');c.classList.add('empty');c.innerHTML='&lt;i class=\'fas fa-image\'&gt;&lt;/i&gt;Preview unavailable'"></div>
+          <div class="proj-preview empty" data-project="freeshelf"><i class="fas fa-image"></i>Add preview image</div>
           <div class="content">
             <span class="badge">Featured</span>
             <span class="status">Shipped</span>
@@ -474,24 +475,28 @@
         </div>
 
         <div class="card">
-          <div class="proj-preview"><img src="images/laundry-preview.png" alt="Laundry Management System preview" style="object-fit:contain;object-position:center;background:#0b0e14;" onerror="var c=this.closest('.proj-preview');c.classList.add('empty');c.innerHTML='&lt;i class=\'fas fa-image\'&gt;&lt;/i&gt;Preview unavailable'"></div>
-          <span class="status">Shipped</span>
-          <div class="text">Laundry Management System</div>
-          <p>A desktop application replacing manual, paper-based tracking at a small laundry business — customers, transactions, billing, inventory, and reporting, with role-based admin/staff access.</p>
-          <div class="tags"><span>C#</span><span>Windows Forms</span><span>.NET Framework</span><span>SQL Server</span></div>
-          <div class="proj-links">
-            <a href="https://github.com/KienCanlubo/Herlene-s-Laundry-Management-System.git" target="_blank" rel="noopener">GitHub ↗</a>
+          <div class="proj-preview"><img src="images/laundry-preview.png" alt="Laundry Management System preview" onerror="var c=this.closest('.proj-preview');c.classList.add('empty');c.innerHTML='&lt;i class=\'fas fa-image\'&gt;&lt;/i&gt;Add preview image'"></div>
+          <div class="content">
+            <span class="status">Shipped</span>
+            <div class="text">Laundry Management System</div>
+            <p>A desktop application replacing manual, paper-based tracking at a small laundry business — customers, transactions, billing, inventory, and reporting, with role-based admin/staff access.</p>
+            <div class="tags"><span>C#</span><span>Windows Forms</span><span>.NET Framework</span><span>SQL Server</span></div>
+            <div class="proj-links">
+              <a href="https://github.com/KienCanlubo/Herlene-s-Laundry-Management-System.git" target="_blank" rel="noopener">GitHub ↗</a>
+            </div>
           </div>
         </div>
 
         <div class="card">
-          <div class="proj-preview"><img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fkiencanlubo.vercel.app%2F?w=900&amp;h=560" alt="Portfolio site preview" loading="lazy" onerror="var c=this.closest('.proj-preview');c.classList.add('empty');c.innerHTML='&lt;i class=\'fas fa-image\'&gt;&lt;/i&gt;Preview unavailable'"></div>
-          <span class="status">Shipped</span>
-          <div class="text">This Portfolio</div>
-          <p>The site you're on right now — built from scratch to put React/Next.js skills into an actual, working, deployed product instead of just a resume bullet point.</p>
-          <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
-          <div class="proj-links">
-            <a href="https://github.com/KienCanlubo/portfolio" target="_blank" rel="noopener">GitHub ↗</a>
+          <div class="proj-preview empty" data-project="portfolio"><i class="fas fa-image"></i>Add preview image</div>
+          <div class="content">
+            <span class="status">Shipped</span>
+            <div class="text">This Portfolio</div>
+            <p>The site you're on right now — built from scratch to put React/Next.js skills into an actual, working, deployed product instead of just a resume bullet point.</p>
+            <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+            <div class="proj-links">
+              <a href="https://github.com/KienCanlubo/portfolio" target="_blank" rel="noopener">GitHub ↗</a>
+            </div>
           </div>
         </div>
 
