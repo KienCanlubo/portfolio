@@ -252,9 +252,17 @@
   .projects .card.featured.major .content{ justify-content:flex-start; }
   .projects .card.featured .proj-gallery{ width:50%; flex-shrink:0; }
   .projects .proj-gallery .gallery-main{
-    width:100%; aspect-ratio:16/9; border-radius:6px; overflow:hidden; background:#111;
+    width:100%; aspect-ratio:16/9; border-radius:6px; overflow:hidden; background:#111; position:relative; cursor:zoom-in;
   }
   .projects .proj-gallery .gallery-main img{ width:100%; height:100%; object-fit:cover; object-position:top; display:block; }
+  .projects .proj-gallery .gallery-maximize{
+    all:unset; position:absolute; top:10px; right:10px; height:34px; width:34px; border-radius:6px;
+    background:rgba(0,0,0,0.55); color:#fff; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; opacity:0; transition:all 0.25s ease; backdrop-filter:blur(2px);
+  }
+  .projects .proj-gallery .gallery-main:hover .gallery-maximize{ opacity:1; }
+  .projects .proj-gallery .gallery-maximize:hover{ background:crimson; }
+  .projects .proj-gallery .gallery-maximize i{ font-size:14px; }
   .projects .proj-gallery .gallery-thumbs{ display:flex; gap:8px; margin-top:10px; overflow-x:auto; padding-bottom:2px; }
   .projects .proj-gallery .gallery-thumbs button{
     all:unset; cursor:pointer; flex-shrink:0; width:64px; height:40px; border-radius:4px; overflow:hidden;
@@ -336,6 +344,41 @@
     padding:11px; font-size:15px; font-weight:500; cursor:pointer; transition:all 0.3s ease;
   }
   .modal-ok:hover{ background:#fff; color:crimson; }
+
+  /* ---- project screenshot lightbox ---- */
+  .lightbox-overlay{
+    position:fixed; inset:0; z-index:2000; display:flex; align-items:center; justify-content:center;
+    background:rgba(6,6,8,0.94); padding:60px 20px;
+  }
+  .lightbox-overlay[hidden]{ display:none; }
+  .lightbox-overlay .lightbox-img{
+    max-width:90vw; max-height:82vh; border-radius:8px; box-shadow:0 20px 60px rgba(0,0,0,0.6);
+    animation:modalIn 0.22s cubic-bezier(0.19,1,0.22,1) both; object-fit:contain;
+  }
+  .lightbox-overlay .lightbox-caption{
+    position:absolute; bottom:24px; left:50%; transform:translateX(-50%); color:#ddd; font-size:13px;
+    font-family:'Ubuntu',sans-serif; background:rgba(0,0,0,0.5); padding:6px 16px; border-radius:20px;
+  }
+  .lightbox-close{
+    all:unset; position:fixed; top:22px; right:26px; height:42px; width:42px; border-radius:50%;
+    background:rgba(255,255,255,0.1); color:#fff; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; font-size:20px; transition:all 0.25s ease;
+  }
+  .lightbox-close:hover{ background:crimson; }
+  .lightbox-nav{
+    all:unset; position:fixed; top:50%; transform:translateY(-50%); height:46px; width:46px; border-radius:50%;
+    background:rgba(255,255,255,0.1); color:#fff; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; font-size:16px; transition:all 0.25s ease;
+  }
+  .lightbox-nav:hover{ background:crimson; }
+  .lightbox-nav.prev{ left:24px; }
+  .lightbox-nav.next{ right:24px; }
+  @media (max-width:600px){
+    .lightbox-nav{ height:38px; width:38px; }
+    .lightbox-nav.prev{ left:10px; }
+    .lightbox-nav.next{ right:10px; }
+    .lightbox-close{ top:14px; right:14px; }
+  }
 
   /* ---------------- FOOTER ---------------- */
   footer{ background:#0d0d0d; padding:26px 23px; color:#ccc; text-align:center; font-size:14px; }
@@ -639,7 +682,10 @@
 
         <div class="card featured major">
           <div class="proj-gallery">
-            <div class="gallery-main"><img src="images/laundry-customers.png" alt="Laundry Management System — Customer Management"></div>
+            <div class="gallery-main">
+              <img src="images/laundry-customers.png" alt="Laundry Management System — Customer Management">
+              <button type="button" class="gallery-maximize" aria-label="View screenshot full size"><i class="fas fa-expand"></i></button>
+            </div>
             <div class="gallery-thumbs">
               <button type="button" class="active" data-src="images/laundry-customers.png" data-alt="Customer Management" aria-label="Customer Management screenshot"><img src="images/laundry-customers.png" alt=""></button>
               <button type="button" data-src="images/laundry-transactions.png" data-alt="Transaction Management" aria-label="Transaction Management screenshot"><img src="images/laundry-transactions.png" alt=""></button>
@@ -752,6 +798,15 @@
     </div>
   </div>
 
+  <!-- Project screenshot lightbox -->
+  <div class="lightbox-overlay" id="lightboxOverlay" role="dialog" aria-modal="true" aria-label="Project screenshot viewer" hidden>
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+    <button type="button" class="lightbox-nav prev" id="lightboxPrev" aria-label="Previous screenshot"><i class="fas fa-chevron-left"></i></button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    <button type="button" class="lightbox-nav next" id="lightboxNext" aria-label="Next screenshot"><i class="fas fa-chevron-right"></i></button>
+    <span class="lightbox-caption" id="lightboxCaption"></span>
+  </div>
+
   <!-- FOOTER -->
   <footer>
     <div class="foot-social">
@@ -809,18 +864,85 @@
   // footer year
   document.getElementById('footerYear').textContent = new Date().getFullYear();
 
-  // project screenshot gallery (thumbnail switcher)
-  document.querySelectorAll('.proj-gallery').forEach(gallery => {
+  // project screenshot gallery (thumbnail switcher + lightbox)
+  const lightboxOverlay = document.getElementById('lightboxOverlay');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+  const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
+
+  let activeItems = [];
+  let activeIndex = 0;
+  let activeGallery = null;
+  let activeBaseTitle = '';
+
+  function setGalleryImage(gallery, index){
     const mainImg = gallery.querySelector('.gallery-main img');
     const thumbs = gallery.querySelectorAll('.gallery-thumbs button');
-    thumbs.forEach(btn => {
+    const btn = thumbs[index];
+    if(!btn) return;
+    mainImg.src = btn.dataset.src;
+    mainImg.alt = activeBaseTitle + ' — ' + btn.dataset.alt;
+    thumbs.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  function updateLightbox(){
+    const item = activeItems[activeIndex];
+    lightboxImg.src = item.src;
+    lightboxImg.alt = activeBaseTitle + ' — ' + item.alt;
+    lightboxCaption.textContent = item.alt + ' (' + (activeIndex + 1) + ' / ' + activeItems.length + ')';
+    if(activeGallery) setGalleryImage(activeGallery, activeIndex);
+  }
+
+  function openLightbox(gallery, index){
+    const thumbs = gallery.querySelectorAll('.gallery-thumbs button');
+    activeItems = Array.from(thumbs).map(b => ({ src: b.dataset.src, alt: b.dataset.alt }));
+    activeGallery = gallery;
+    activeIndex = index;
+    activeBaseTitle = gallery.querySelector('.gallery-main img').alt.split(' — ')[0];
+    updateLightbox();
+    lightboxOverlay.hidden = false;
+    document.body.style.overflow = 'hidden';
+    lightboxClose.focus();
+  }
+
+  function closeLightbox(){
+    lightboxOverlay.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.proj-gallery').forEach(gallery => {
+    const mainImg = gallery.querySelector('.gallery-main img');
+    const maximizeBtn = gallery.querySelector('.gallery-maximize');
+    const thumbs = gallery.querySelectorAll('.gallery-thumbs button');
+    const baseTitle = mainImg.alt.split(' — ')[0];
+
+    thumbs.forEach((btn, i) => {
       btn.addEventListener('click', () => {
-        mainImg.src = btn.dataset.src;
-        mainImg.alt = mainImg.alt.split(' — ')[0] + ' — ' + btn.dataset.alt;
-        thumbs.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+        activeBaseTitle = baseTitle;
+        setGalleryImage(gallery, i);
       });
     });
+
+    const openAtCurrent = () => {
+      const currentIndex = Array.from(thumbs).findIndex(b => b.classList.contains('active'));
+      openLightbox(gallery, currentIndex > -1 ? currentIndex : 0);
+    };
+    if(maximizeBtn) maximizeBtn.addEventListener('click', openAtCurrent);
+    mainImg.addEventListener('dblclick', openAtCurrent);
+  });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxOverlay.addEventListener('click', (e) => { if(e.target === lightboxOverlay) closeLightbox(); });
+  lightboxPrev.addEventListener('click', () => { activeIndex = (activeIndex - 1 + activeItems.length) % activeItems.length; updateLightbox(); });
+  lightboxNext.addEventListener('click', () => { activeIndex = (activeIndex + 1) % activeItems.length; updateLightbox(); });
+  document.addEventListener('keydown', (e) => {
+    if(lightboxOverlay.hidden) return;
+    if(e.key === 'Escape') closeLightbox();
+    if(e.key === 'ArrowLeft') lightboxPrev.click();
+    if(e.key === 'ArrowRight') lightboxNext.click();
   });
 
   // ---- contact form (Formspree) ----
