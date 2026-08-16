@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kien Canlubo — Software Developer</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/devicon/2.15.1/devicon.min.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.11/typed.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/devicon/2.15.1/devicon.min.css"/>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
 
@@ -30,7 +29,6 @@
 
   .about .about-content,
   .services .serv-content,
-  .skills .skills-content,
   .contact .contact-content{
     display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
   }
@@ -81,8 +79,8 @@
   .home .home-content .home-text{ max-width:600px; }
   .home .home-content .text-1{ font-size:24px; color:#ccc; }
   .home .home-content .text-2{ font-size:70px; font-weight:600; margin-left:-3px; }
-  .home .home-content .text-3{ font-size:36px; margin:8px 0 4px; }
-  .home .home-content .text-3 span{ color:crimson; font-weight:600; }
+  .home .home-content .text-3{ font-size:24px; font-weight:500; margin:10px 0 4px; color:#e6e6e6; font-family:'Poppins',sans-serif; }
+  .home .home-content .text-3 span{ color:crimson; font-weight:600; margin:0 4px; }
   .home .home-content .home-sub{ max-width:480px; color:#b8b8b8; font-family:'Poppins',sans-serif; font-size:15px; line-height:1.7; margin-top:14px; }
   .home .home-content .btn-row{ display:flex; gap:14px; flex-wrap:wrap; margin-top:26px; }
   .home .home-content a{
@@ -103,13 +101,8 @@
 
   /* ---------------- ABOUT ---------------- */
   .about .title::after{ content:"who i am"; }
-  .about .about-content .left{ width:42%; }
-  .about .about-content .left .photo-box{
-    height:380px; width:380px; border-radius:6px; overflow:hidden; margin:auto;
-    background:#111; display:flex; align-items:center; justify-content:center;
-  }
-  .about .about-content .left img{ height:100%; width:100%; object-fit:cover; }
-  .about .about-content .right{ width:55%; }
+  .about .about-content{ justify-content:center; }
+  .about .about-content .right.full{ width:100%; max-width:800px; margin:auto; }
   .about .about-content .right .text{ font-size:24px; font-weight:600; margin-bottom:10px; }
   .about .about-content .right .text span{ color:crimson; }
   .about .about-content .right p{ text-align:justify; color:#333; line-height:1.8; }
@@ -119,6 +112,14 @@
     padding:10px 28px; margin-top:22px; border-radius:6px; border:2px solid crimson; transition:all 0.3s ease, transform 0.25s ease;
   }
   .about .about-content .right a:hover{ color:crimson; background:none; transform:translateY(-3px); }
+  .about .about-content .right .about-highlights{ display:flex; flex-wrap:wrap; gap:10px; margin:22px 0 26px; }
+  .about .about-content .right .about-highlights span{
+    display:inline-flex; align-items:center; gap:8px; font-size:13.5px; font-weight:500; font-family:'Ubuntu',sans-serif;
+    background:#f1f1f1; color:#333; padding:8px 16px; border-radius:20px; transition:all 0.3s ease;
+  }
+  .about .about-content .right .about-highlights span i{ color:crimson; font-size:14px; transition:color 0.3s ease; }
+  .about .about-content .right .about-highlights span:hover{ background:crimson; color:#fff; transform:translateY(-2px); }
+  .about .about-content .right .about-highlights span:hover i{ color:#fff; }
 
   /* ---------------- SERVICES ---------------- */
   .services{ color:#fff; background:#111; }
@@ -139,25 +140,55 @@
 
   /* ---------------- SKILLS ---------------- */
   .skills .title::after{ content:"what i know"; }
-  .skills .skills-content .column{ width:calc(50% - 30px); }
-  .skills .skills-content .left .text{ font-size:20px; font-weight:600; margin-bottom:10px; }
-  .skills .skills-content .left p{ text-align:justify; color:#333; line-height:1.8; }
-  .skills .skills-content .left .stack-tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
-  .skills .skills-content .left .stack-tags span{
+  .skills .skills-intro{ max-width:720px; margin:-30px auto 50px; text-align:center; color:#555; line-height:1.8; }
+  .skills .skills-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:22px; }
+  .skills .skill-category{
+    background:#f8f8f8; border:1px solid #ececec; border-radius:8px; padding:26px 24px; transition:all 0.3s ease;
+  }
+  .skills .skill-category:hover{ border-color:rgba(220,20,60,0.35); transform:translateY(-3px); }
+  .skills .skill-category .cat-title{
+    display:flex; align-items:center; gap:10px; font-size:17px; font-weight:600; font-family:'Ubuntu',sans-serif;
+    margin-bottom:16px;
+  }
+  .skills .skill-category .cat-title i{ color:crimson; font-size:17px; }
+  .skills .skill-category .stack-tags{ display:flex; flex-wrap:wrap; gap:8px; }
+  .skills .skill-category .stack-tags span{
     display:inline-flex; align-items:center; gap:7px; font-size:12.5px; font-family:'Ubuntu',sans-serif;
-    background:#f1f1f1; color:#333; padding:6px 14px 6px 10px; border-radius:14px; transition:all 0.3s ease;
+    background:#fff; color:#333; border:1px solid #eee; padding:6px 14px 6px 10px; border-radius:14px; transition:all 0.3s ease;
   }
-  .skills .skills-content .left .stack-tags span i{ font-size:15px; }
-  .skills .skills-content .left .stack-tags span:hover{ background:crimson; color:#fff; }
-  .skills .skills-content .right .bars{ margin-bottom:18px; }
-  .skills .skills-content .right .info{ display:flex; margin-bottom:6px; align-items:center; justify-content:space-between; }
-  .skills .skills-content .right span{ font-weight:500; font-size:16px; }
-  .skills .skills-content .right .line{ height:6px; width:100%; background:#e6e6e6; border-radius:3px; position:relative; }
-  .skills .skills-content .right .line::before{
-    content:""; position:absolute; height:100%; left:0; top:0; border-radius:3px; background:crimson; width:0;
-    transition:width 1.2s cubic-bezier(0.19,1,0.22,1);
+  .skills .skill-category .stack-tags span i{ font-size:15px; }
+  .skills .skill-category .stack-tags span:hover{ background:crimson; border-color:crimson; color:#fff; }
+
+  /* ---------------- EXPERIENCE ---------------- */
+  .experience{ color:#fff; background:#111; }
+  .experience .title::before{ background:#fff; }
+  .experience .title::after{ background:#111; content:"where i've worked"; }
+  .experience .exp-timeline{ position:relative; max-width:820px; margin:auto; padding-left:34px; }
+  .experience .exp-timeline::before{
+    content:""; position:absolute; left:6px; top:6px; bottom:6px; width:2px; background:rgba(255,255,255,0.15);
   }
-  .skills .skills-content .right .bars.in .line::before{ width:var(--pct); }
+  .experience .exp-item{ position:relative; margin-bottom:36px; }
+  .experience .exp-item:last-child{ margin-bottom:0; }
+  .experience .exp-dot{
+    position:absolute; left:-34px; top:8px; height:13px; width:13px; border-radius:50%;
+    background:crimson; box-shadow:0 0 0 4px rgba(220,20,60,0.25);
+  }
+  .experience .exp-card{
+    background:#1d1d1d; border:1px solid rgba(255,255,255,0.06); border-radius:8px; padding:28px 30px;
+    transition:all 0.3s ease;
+  }
+  .experience .exp-card:hover{ border-color:rgba(220,20,60,0.4); transform:translateY(-2px); }
+  .experience .exp-head{ display:flex; flex-wrap:wrap; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:16px; }
+  .experience .exp-role{ font-size:20px; font-weight:600; font-family:'Ubuntu',sans-serif; }
+  .experience .exp-company{ font-size:14.5px; color:#bbb; margin-top:4px; }
+  .experience .exp-date{
+    font-size:12.5px; font-weight:500; color:#f4d5dc; background:rgba(220,20,60,0.18);
+    padding:6px 14px; border-radius:14px; white-space:nowrap; font-family:'Ubuntu',sans-serif;
+  }
+  .experience .exp-list{ list-style:none; }
+  .experience .exp-list li{ position:relative; padding-left:20px; color:#ccc; font-size:14.5px; line-height:1.7; }
+  .experience .exp-list li + li{ margin-top:8px; }
+  .experience .exp-list li::before{ content:"›"; position:absolute; left:0; color:crimson; font-weight:700; }
 
   /* ---------------- PROJECTS ---------------- */
   .projects{ color:#fff; background:#111; }
@@ -217,10 +248,35 @@
     padding:7px 18px; border-radius:0 6px 0 10px; transition:all 0.3s ease; z-index:1;
   }
   .projects .card.featured:hover .badge{ background:#fff; color:crimson; }
+  .projects .card.featured.major{ max-height:none; align-items:flex-start; padding:34px 34px; }
+  .projects .card.featured.major .content{ justify-content:flex-start; }
+  .projects .card.featured .proj-gallery{ width:50%; flex-shrink:0; }
+  .projects .proj-gallery .gallery-main{
+    width:100%; aspect-ratio:16/9; border-radius:6px; overflow:hidden; background:#111;
+  }
+  .projects .proj-gallery .gallery-main img{ width:100%; height:100%; object-fit:cover; object-position:top; display:block; }
+  .projects .proj-gallery .gallery-thumbs{ display:flex; gap:8px; margin-top:10px; overflow-x:auto; padding-bottom:2px; }
+  .projects .proj-gallery .gallery-thumbs button{
+    all:unset; cursor:pointer; flex-shrink:0; width:64px; height:40px; border-radius:4px; overflow:hidden;
+    border:2px solid transparent; opacity:0.55; transition:all 0.25s ease;
+  }
+  .projects .proj-gallery .gallery-thumbs button img{ width:100%; height:100%; object-fit:cover; object-position:top; display:block; }
+  .projects .proj-gallery .gallery-thumbs button:hover{ opacity:0.9; }
+  .projects .proj-gallery .gallery-thumbs button.active{ opacity:1; border-color:crimson; }
+  .projects .card.featured:hover .proj-gallery .gallery-thumbs button.active{ border-color:#fff; }
+  .projects .feature-list{ list-style:none; display:grid; grid-template-columns:repeat(2, 1fr); gap:6px 16px; margin:16px 0; }
+  .projects .feature-list li{ position:relative; padding-left:20px; font-size:12.5px; color:#ccc; transition:color 0.3s ease; }
+  .projects .feature-list li::before{
+    content:"\f00c"; font-family:"Font Awesome 5 Free"; font-weight:900; position:absolute; left:0; top:2px;
+    color:crimson; font-size:10px; transition:color 0.3s ease;
+  }
+  .projects .card:hover .feature-list li{ color:#fff; }
+  .projects .card:hover .feature-list li::before{ color:#fff; }
   @media (max-width:800px){
     .projects .proj-grid{ grid-template-columns:1fr; }
     .projects .card.featured{ flex-direction:column; align-items:stretch; height:auto; min-height:0; max-height:none; }
-    .projects .card.featured .proj-preview, .projects .card.featured .content{ width:100%; }
+    .projects .card.featured .proj-preview, .projects .card.featured .content, .projects .card.featured .proj-gallery{ width:100%; }
+    .projects .feature-list{ grid-template-columns:1fr; }
   }
 
   /* ---------------- CONTACT ---------------- */
@@ -304,14 +360,15 @@
   html[data-theme="dark"] section .title::after{ background:#0b0b0d; }
   html[data-theme="dark"] .about .about-content .right .text{ color:#f0f0f0; }
   html[data-theme="dark"] .about .about-content .right p{ color:#cfcfcf; }
-  html[data-theme="dark"] .about .about-content .left .photo-box{ background:#000; }
-  html[data-theme="dark"] .skills .skills-content .left .text{ color:#f0f0f0; }
-  html[data-theme="dark"] .skills .skills-content .left p{ color:#cfcfcf; }
-  html[data-theme="dark"] .skills .skills-content .left .stack-tags span{ background:#1d1d1d; color:#ddd; }
+  html[data-theme="dark"] .about .about-content .right .about-highlights span{ background:#1d1d1d; color:#ddd; }
+  html[data-theme="dark"] .skills .skills-intro{ color:#cfcfcf; }
+  html[data-theme="dark"] .skills .skill-category{ background:#1d1d1d; border-color:rgba(255,255,255,0.08); }
+  html[data-theme="dark"] .skills .skill-category .cat-title{ color:#f0f0f0; }
+  html[data-theme="dark"] .skills .skill-category .stack-tags span{ background:#161616; border-color:rgba(255,255,255,0.08); color:#ddd; }
   html[data-theme="dark"] .devicon-github-original,
-  html[data-theme="dark"] .devicon-unity-original{ filter:invert(1); }
-  html[data-theme="dark"] .skills .skills-content .right span{ color:#f0f0f0; }
-  html[data-theme="dark"] .skills .skills-content .right .line{ background:#2a2a2a; }
+  html[data-theme="dark"] .devicon-unity-original,
+  html[data-theme="dark"] .devicon-nextjs-original,
+  html[data-theme="dark"] .devicon-vscode-plain{ filter:invert(1); }
   html[data-theme="dark"] .contact .contact-content .text{ color:#f0f0f0; }
   html[data-theme="dark"] .contact .contact-content .left p{ color:#cfcfcf; }
   html[data-theme="dark"] .contact .contact-content .info .head{ color:#f0f0f0; }
@@ -330,7 +387,6 @@
 
   /* ---------------- RESPONSIVE ---------------- */
   @media (max-width:1104px){
-    .about .about-content .left .photo-box{ height:330px; width:330px; }
     .projects .proj-grid{ grid-template-columns:repeat(2,1fr); }
   }
   @media (max-width:991px){ .max-width{ padding:0 50px; } }
@@ -350,20 +406,20 @@
     .home .home-content .btn-row{ justify-content:center; }
     .home .home-content .photo-ring{ height:220px; width:220px; }
     .home .home-content .text-2{ font-size:58px; }
-    .home .home-content .text-3{ font-size:30px; }
+    .home .home-content .text-3{ font-size:20px; }
     .max-width{ max-width:930px; }
-    .about .about-content .column{ width:100%; }
-    .about .about-content .left{ display:flex; justify-content:center; margin:0 auto 50px; }
-    .about .about-content .right{ flex:100%; }
     .services .serv-content .card{ width:calc(50% - 10px); margin-bottom:20px; }
-    .skills .skills-content .column, .contact .contact-content .column{ width:100%; margin-bottom:35px; }
+    .contact .contact-content .column{ width:100%; margin-bottom:35px; }
     .projects .proj-grid{ grid-template-columns:1fr; }
   }
   @media (max-width:690px){
     .max-width{ padding:0 23px; }
     .home .home-content .text-2{ font-size:48px; }
-    .home .home-content .text-3{ font-size:26px; }
+    .home .home-content .text-3{ font-size:18px; }
     .services .serv-content .card{ width:100%; }
+    .experience .exp-timeline{ padding-left:26px; }
+    .experience .exp-card{ padding:22px 20px; }
+    .experience .exp-date{ order:-1; }
   }
   @media (max-width:500px){
     section{ padding:70px 0; }
@@ -384,6 +440,7 @@
         <li><a href="#about" class="menu-link">About</a></li>
         <li><a href="#services" class="menu-link">Services</a></li>
         <li><a href="#skills" class="menu-link">Skills</a></li>
+        <li><a href="#experience" class="menu-link">Experience</a></li>
         <li><a href="#projects" class="menu-link">Projects</a></li>
         <li><a href="#contact" class="menu-link">Contact</a></li>
       </ul>
@@ -399,11 +456,11 @@
         <div class="home-text">
           <div class="text-1">Hello, my name is</div>
           <div class="text-2">Kien Canlubo</div>
-          <div class="text-3">I'm a <span class="typing"></span></div>
-          <p class="home-sub">I build full-stack web apps, desktop systems, and database-driven tools — from schema design to a working, polished UI — for real problems, not just portfolio pieces.</p>
+          <div class="text-3">Software Developer <span>|</span> Full-Stack &amp; Web Development</div>
+          <p class="home-sub">IT graduate focused on building practical web, desktop, and database-driven applications.</p>
           <div class="btn-row">
-            <a href="#projects">View my work</a>
-            <a href="#contact" class="ghost">Hire me</a>
+            <a href="#projects">View My Work</a>
+            <a href="Resume-KienCanlubo.pdf" class="ghost" target="_blank" rel="noopener">Download Resume</a>
           </div>
         </div>
         <div class="home-photo">
@@ -420,16 +477,20 @@
     <div class="max-width">
       <h2 class="title">About me</h2>
       <div class="about-content">
-        <div class="column left">
-          <div class="photo-box">
-            <img src="profile-photo.jpg" alt="Kien Canlubo">
+        <div class="column right full">
+          <div class="text">I'm Kien and I'm a <span class="static-role">Full-Stack Developer</span></div>
+          <p>I'm a BS Information Technology graduate from STI College Santa Rosa (2022–2026), focused on software and web development. I like taking real, unstructured problems — a business still tracked on paper, a process running on spreadsheets — and turning them into organized, database-driven systems people can actually rely on day to day.</p>
+          <p>Beyond coursework, my OJT experience gave me hands-on exposure to real workplace processes, documentation, and problem-solving under practical constraints — not just theory.</p>
+          <div class="about-highlights">
+            <span><i class="fas fa-graduation-cap"></i>BS Information Technology</span>
+            <span><i class="fas fa-school"></i>STI College Santa Rosa</span>
+            <span><i class="fas fa-calendar-alt"></i>2022–2026</span>
+            <span><i class="fas fa-laptop-code"></i>Software &amp; Web Development</span>
+            <span><i class="fas fa-database"></i>Database-Driven Applications</span>
+            <span><i class="fas fa-puzzle-piece"></i>Problem Solving</span>
+            <span><i class="fas fa-briefcase"></i>OJT Experience</span>
           </div>
-        </div>
-        <div class="column right">
-          <div class="text">I'm Kien and I'm a <span class="typing-2"></span></div>
-          <p>Most of my projects start the same way: someone's still running a business on a notebook or a spreadsheet, and I get curious about what a small, focused system could replace it with. That curiosity turned into a full desktop application for a laundry business, built solo from the database schema up.</p>
-          <p>I care more about whether a project actually works end-to-end than whether it looks impressive on a slide — designing the tables, wiring the CRUD operations, and making sure the person using it day-to-day can trust it.</p>
-          <a href="Resume-KienCanlubo.pdf" target="_blank" rel="noopener">Download CV</a>
+          <a href="Resume-KienCanlubo.pdf" target="_blank" rel="noopener">View Resume</a>
         </div>
       </div>
     </div>
@@ -469,30 +530,82 @@
   <section class="skills reveal" id="skills">
     <div class="max-width">
       <h2 class="title">My skills</h2>
-      <div class="skills-content">
-        <div class="column left">
-          <div class="text">My technical skills & experience.</div>
-          <p>I work across the stack — from styling and client-side interactivity, to server logic, to the database underneath it. Below is roughly how I'd rate my day-to-day fluency in each area, alongside the broader toolset I use regularly.</p>
+      <p class="skills-intro">I work across the stack — from styling and client-side interactivity, to backend logic, to the database underneath it. Here's the toolset I actually use.</p>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <div class="cat-title"><i class="fas fa-code"></i>Programming Languages</div>
           <div class="stack-tags">
-            <span><i class="devicon-javascript-plain colored"></i>JavaScript</span>
-            <span><i class="devicon-typescript-plain colored"></i>TypeScript</span>
-            <span><i class="devicon-python-plain colored"></i>Python</span>
             <span><i class="devicon-csharp-plain colored"></i>C#</span>
             <span><i class="devicon-cplusplus-plain colored"></i>C++</span>
             <span><i class="devicon-java-plain colored"></i>Java</span>
-            <span><i class="devicon-objectivec-plain colored"></i>Objective-C</span>
-            <span><i class="devicon-mysql-plain colored"></i>SQL</span>
-            <span><i class="devicon-git-plain colored"></i>Git</span>
-            <span><i class="devicon-github-original"></i>GitHub</span>
-            <span><i class="devicon-unity-original"></i>Unity</span>
+            <span><i class="devicon-javascript-plain colored"></i>JavaScript</span>
+            <span><i class="devicon-python-plain colored"></i>Python</span>
           </div>
         </div>
-        <div class="column right">
-          <div class="bars" data-pct="90"><div class="info"><span>HTML / CSS</span><span>90%</span></div><div class="line"></div></div>
-          <div class="bars" data-pct="85"><div class="info"><span>JavaScript</span><span>85%</span></div><div class="line"></div></div>
-          <div class="bars" data-pct="80"><div class="info"><span>C# / .NET</span><span>80%</span></div><div class="line"></div></div>
-          <div class="bars" data-pct="78"><div class="info"><span>SQL Server / MySQL</span><span>78%</span></div><div class="line"></div></div>
-          <div class="bars" data-pct="70"><div class="info"><span>React / Next.js</span><span>70%</span></div><div class="line"></div></div>
+        <div class="skill-category">
+          <div class="cat-title"><i class="fas fa-laptop-code"></i>Frontend</div>
+          <div class="stack-tags">
+            <span><i class="devicon-html5-plain colored"></i>HTML</span>
+            <span><i class="devicon-css3-plain colored"></i>CSS</span>
+            <span><i class="devicon-javascript-plain colored"></i>JavaScript</span>
+            <span><i class="devicon-react-original colored"></i>React</span>
+            <span><i class="devicon-nextjs-original"></i>Next.js</span>
+            <span><i class="devicon-tailwindcss-plain colored"></i>Tailwind CSS</span>
+            <span><i class="devicon-typescript-plain colored"></i>TypeScript</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="cat-title"><i class="fas fa-server"></i>Backend / Development</div>
+          <div class="stack-tags">
+            <span><i class="devicon-nodejs-plain colored"></i>Node.js</span>
+            <span><i class="devicon-dotnetcore-plain colored"></i>.NET</span>
+            <span><i class="fas fa-window-maximize"></i>C# WinForms</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="cat-title"><i class="fas fa-database"></i>Database</div>
+          <div class="stack-tags">
+            <span><i class="devicon-microsoftsqlserver-plain colored"></i>SQL Server</span>
+            <span><i class="fas fa-table"></i>SQL</span>
+            <span><i class="fas fa-server"></i>SSMS</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="cat-title"><i class="fas fa-toolbox"></i>Tools</div>
+          <div class="stack-tags">
+            <span><i class="devicon-visualstudio-plain colored"></i>Visual Studio</span>
+            <span><i class="devicon-vscode-plain colored"></i>VS Code</span>
+            <span><i class="devicon-git-plain colored"></i>Git</span>
+            <span><i class="devicon-github-original"></i>GitHub</span>
+            <span><i class="devicon-npm-original-wordmark colored"></i>npm</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="experience reveal" id="experience">
+    <div class="max-width">
+      <h2 class="title">Experience</h2>
+      <div class="exp-timeline">
+        <div class="exp-item">
+          <div class="exp-dot"></div>
+          <div class="exp-card">
+            <div class="exp-head">
+              <div>
+                <div class="exp-role">OJT / Internship</div>
+                <div class="exp-company">Philippine Postal Corporation (PHLPost) — Santa Rosa Post Office</div>
+              </div>
+              <div class="exp-date">Feb 2026 – Jul 2026</div>
+            </div>
+            <ul class="exp-list">
+              <li>Provided technical support for office computers, printers, and peripheral devices.</li>
+              <li>Assisted in troubleshooting hardware and software issues and performed preventive maintenance.</li>
+              <li>Assisted with data encoding, document management, and Microsoft Office-related concerns.</li>
+              <li>Supported employees with general IT concerns and helped maintain smooth daily IT operations.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -524,16 +637,35 @@
           </div>
         </div>
 
-        <div class="card">
-          <div class="proj-preview"><img src="images/laundry-preview.png" alt="Laundry Management System preview" onerror="var c=this.closest('.proj-preview');c.classList.add('empty');c.innerHTML='&lt;i class=\'fas fa-image\'&gt;&lt;/i&gt;Add preview image'"></div>
+        <div class="card featured major">
+          <div class="proj-gallery">
+            <div class="gallery-main"><img src="images/laundry-customers.png" alt="Laundry Management System — Customer Management"></div>
+            <div class="gallery-thumbs">
+              <button type="button" class="active" data-src="images/laundry-customers.png" data-alt="Customer Management" aria-label="Customer Management screenshot"><img src="images/laundry-customers.png" alt=""></button>
+              <button type="button" data-src="images/laundry-transactions.png" data-alt="Transaction Management" aria-label="Transaction Management screenshot"><img src="images/laundry-transactions.png" alt=""></button>
+              <button type="button" data-src="images/laundry-billing.png" data-alt="Billing &amp; Invoicing" aria-label="Billing and Invoicing screenshot"><img src="images/laundry-billing.png" alt=""></button>
+              <button type="button" data-src="images/laundry-inventory.png" data-alt="Inventory Management" aria-label="Inventory Management screenshot"><img src="images/laundry-inventory.png" alt=""></button>
+              <button type="button" data-src="images/laundry-reports.png" data-alt="Sales Reports" aria-label="Sales Reports screenshot"><img src="images/laundry-reports.png" alt=""></button>
+              <button type="button" data-src="images/laundry-users.png" data-alt="User Management" aria-label="User Management screenshot"><img src="images/laundry-users.png" alt=""></button>
+            </div>
+          </div>
           <div class="content">
+            <span class="badge">Major Project</span>
             <span class="status">Shipped</span>
             <div class="text">Laundry Management System</div>
-            <p>A desktop system replacing paper-based tracking at a small laundry business — customers, billing, inventory, and role-based access.</p>
+            <p>A full desktop system built solo for a real laundry business, replacing paper-based tracking end-to-end — from customer intake to billing, inventory, and reporting.</p>
+            <ul class="feature-list">
+              <li>Customer management</li>
+              <li>Transaction management</li>
+              <li>Billing &amp; invoicing</li>
+              <li>Inventory / material tracking</li>
+              <li>Sales reports</li>
+              <li>Admin &amp; staff roles</li>
+            </ul>
             <div class="tags">
               <span><i class="devicon-csharp-plain colored"></i>C#</span>
               <span><i class="devicon-windows8-original colored"></i>Windows Forms</span>
-              <span><i class="devicon-dotnetcore-plain colored"></i>.NET Framework</span>
+              <span><i class="devicon-dotnetcore-plain colored"></i>.NET</span>
               <span><i class="devicon-microsoftsqlserver-plain colored"></i>SQL Server</span>
             </div>
             <div class="proj-links">
@@ -668,24 +800,6 @@
     link.addEventListener('click', () => { menu.classList.remove('active'); menuIcon.querySelector('i').classList.add('fa-bars'); menuIcon.querySelector('i').classList.remove('fa-times'); });
   });
 
-  // typing effect
-  if(!reduced && window.Typed){
-    const roles = ["Software Developer", "Full-Stack Developer", "Web Developer"];
-    new Typed(".typing", { strings: roles, typeSpeed: 90, backSpeed: 50, loop: true });
-    new Typed(".typing-2", { strings: roles, typeSpeed: 90, backSpeed: 50, loop: true });
-  } else {
-    document.querySelectorAll('.typing, .typing-2').forEach(el => el.textContent = "Software Developer");
-  }
-
-  // animated skill bars on scroll into view
-  document.querySelectorAll('.skills .bars').forEach(bar => {
-    bar.style.setProperty('--pct', bar.dataset.pct + '%');
-  });
-  const barObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); barObserver.unobserve(e.target); } });
-  }, { threshold: 0.3 });
-  document.querySelectorAll('.skills .bars').forEach(el => barObserver.observe(el));
-
   // fade-in sections as they enter the viewport
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in-view'); revealObserver.unobserve(e.target); } });
@@ -694,6 +808,20 @@
 
   // footer year
   document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+  // project screenshot gallery (thumbnail switcher)
+  document.querySelectorAll('.proj-gallery').forEach(gallery => {
+    const mainImg = gallery.querySelector('.gallery-main img');
+    const thumbs = gallery.querySelectorAll('.gallery-thumbs button');
+    thumbs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        mainImg.src = btn.dataset.src;
+        mainImg.alt = mainImg.alt.split(' — ')[0] + ' — ' + btn.dataset.alt;
+        thumbs.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  });
 
   // ---- contact form (Formspree) ----
   const FORM_ENDPOINT = 'https://formspree.io/f/xqpzbwlp';
