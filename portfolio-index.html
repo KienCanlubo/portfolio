@@ -273,6 +273,22 @@
     padding:7px 18px; border-radius:0 10px 0 10px; z-index:1;
   }
   .projects .card.featured.major{ max-height:none; align-items:flex-start; padding:34px 34px; }
+
+  .projects .card.placeholder{
+    background:transparent; border:1.5px dashed rgba(255,255,255,0.15);
+    align-items:center; justify-content:center; text-align:center; gap:14px;
+  }
+  .projects .card.placeholder:hover{ border-color:rgba(220,20,60,0.4); transform:translateY(-4px); box-shadow:none; }
+  .projects .card.placeholder .placeholder-icon{
+    width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,0.04); color:#666; font-size:20px; transition:color 0.3s ease, background 0.3s ease;
+  }
+  .projects .card.placeholder:hover .placeholder-icon{ color:crimson; background:rgba(220,20,60,0.1); }
+  .projects .card.placeholder .status.coming-soon{
+    color:#999; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); align-self:center;
+  }
+  .projects .card.placeholder .text{ font-size:18px; font-weight:600; color:#ccc; margin-bottom:4px; }
+  .projects .card.placeholder p{ color:#777; font-size:13px; line-height:1.6; max-width:260px; }
   .projects .card.featured.major .content{ justify-content:flex-start; }
   .projects .card.featured .proj-gallery{ width:50%; flex-shrink:0; }
   .projects .proj-gallery .gallery-main{
@@ -688,6 +704,11 @@
   <section class="projects reveal" id="projects">
     <div class="max-width">
       <h2 class="title">My projects</h2>
+      <!--
+        To add a new project: copy an existing <div class="card"> block above and edit its content.
+        To replace a "Coming Soon" placeholder with a finished project: delete the matching
+        <div class="card placeholder">...</div> block below and paste a real project card in its place.
+      -->
       <div class="proj-grid">
 
         <div class="card featured">
@@ -765,6 +786,27 @@
               <a href="https://github.com/KienCanlubo/portfolio" target="_blank" rel="noopener">GitHub ↗</a>
             </div>
           </div>
+        </div>
+
+        <div class="card placeholder">
+          <div class="placeholder-icon"><i class="fab fa-shopify"></i></div>
+          <span class="status coming-soon">Coming Soon</span>
+          <div class="text">Shopify E-commerce Landing Page</div>
+          <p>Planned project — will be added once complete.</p>
+        </div>
+
+        <div class="card placeholder">
+          <div class="placeholder-icon"><i class="fab fa-react"></i></div>
+          <span class="status coming-soon">Coming Soon</span>
+          <div class="text">React / Next.js Application</div>
+          <p>Planned project — will be added once complete.</p>
+        </div>
+
+        <div class="card placeholder">
+          <div class="placeholder-icon"><i class="fab fa-python"></i></div>
+          <span class="status coming-soon">Coming Soon</span>
+          <div class="text">Python Application</div>
+          <p>Planned project — will be added once complete.</p>
         </div>
 
       </div>
