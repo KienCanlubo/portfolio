@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kien Canlubo — Software Developer</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/devicon/2.15.1/devicon.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.11/typed.min.js"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
@@ -20,7 +21,10 @@
 
   :focus-visible{ outline:2px solid crimson; outline-offset:3px; }
 
-  section{ padding:100px 0; }
+  .reveal{ opacity:0; transform:translateY(30px); transition:opacity 0.8s cubic-bezier(0.19,1,0.22,1), transform 0.8s cubic-bezier(0.19,1,0.22,1); }
+  .reveal.in-view{ opacity:1; transform:translateY(0); }
+
+  section{ padding:130px 0; }
   .max-width{ max-width:1300px; padding:0 80px; margin:auto; }
   .about, .services, .skills, .projects, .contact, footer{ font-family:'Poppins', sans-serif; }
 
@@ -32,8 +36,8 @@
   }
 
   section .title{
-    position:relative; text-align:center; font-size:40px; font-weight:500;
-    margin-bottom:60px; padding-bottom:20px; font-family:'Ubuntu', sans-serif;
+    position:relative; text-align:center; font-size:44px; font-weight:700; letter-spacing:-0.01em;
+    margin-bottom:70px; padding-bottom:22px; font-family:'Ubuntu', sans-serif;
   }
   section .title::before{
     content:""; position:absolute; bottom:0; left:50%; width:180px; height:3px;
@@ -68,8 +72,10 @@
   /* ---------------- HOME ---------------- */
   .home{
     display:flex; background:linear-gradient(135deg, #0e0e10, #1c1c22 55%, #2a0d16);
+    background-size:200% 200%; animation:heroDrift 16s ease-in-out infinite alternate;
     height:100vh; min-height:560px; color:#fff; font-family:'Ubuntu', sans-serif;
   }
+  @keyframes heroDrift{ from{ background-position:0% 30%; } to{ background-position:100% 70%; } }
   .home .max-width{ width:100%; display:flex; align-items:center; }
   .home .home-content .text-1{ font-size:24px; color:#ccc; }
   .home .home-content .text-2{ font-size:70px; font-weight:600; margin-left:-3px; }
@@ -79,11 +85,11 @@
   .home .home-content .btn-row{ display:flex; gap:14px; flex-wrap:wrap; margin-top:26px; }
   .home .home-content a{
     display:inline-block; background:crimson; color:#fff; font-size:19px; padding:12px 30px;
-    font-weight:400; border-radius:6px; border:2px solid crimson; transition:all 0.3s ease;
+    font-weight:400; border-radius:6px; border:2px solid crimson; transition:all 0.3s ease, transform 0.25s ease;
     font-family:'Poppins',sans-serif;
   }
   .home .home-content a.ghost{ background:none; color:#fff; border-color:rgba(255,255,255,0.4); }
-  .home .home-content a:hover{ color:crimson; background:none; }
+  .home .home-content a:hover{ color:crimson; background:none; transform:translateY(-3px); }
   .home .home-content a.ghost:hover{ color:#fff; background:crimson; border-color:crimson; }
 
   /* ---------------- ABOUT ---------------- */
@@ -101,9 +107,9 @@
   .about .about-content .right p + p{ margin-top:14px; }
   .about .about-content .right a{
     display:inline-block; background:crimson; color:#fff; font-size:18px; font-weight:500;
-    padding:10px 28px; margin-top:22px; border-radius:6px; border:2px solid crimson; transition:all 0.3s ease;
+    padding:10px 28px; margin-top:22px; border-radius:6px; border:2px solid crimson; transition:all 0.3s ease, transform 0.25s ease;
   }
-  .about .about-content .right a:hover{ color:crimson; background:none; }
+  .about .about-content .right a:hover{ color:crimson; background:none; transform:translateY(-3px); }
 
   /* ---------------- SERVICES ---------------- */
   .services{ color:#fff; background:#111; }
@@ -129,9 +135,11 @@
   .skills .skills-content .left p{ text-align:justify; color:#333; line-height:1.8; }
   .skills .skills-content .left .stack-tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
   .skills .skills-content .left .stack-tags span{
-    font-size:12.5px; font-family:'Ubuntu',sans-serif; background:#f1f1f1; color:#333;
-    padding:6px 12px; border-radius:14px;
+    display:inline-flex; align-items:center; gap:7px; font-size:12.5px; font-family:'Ubuntu',sans-serif;
+    background:#f1f1f1; color:#333; padding:6px 14px 6px 10px; border-radius:14px; transition:all 0.3s ease;
   }
+  .skills .skills-content .left .stack-tags span i{ font-size:15px; }
+  .skills .skills-content .left .stack-tags span:hover{ background:crimson; color:#fff; }
   .skills .skills-content .right .bars{ margin-bottom:18px; }
   .skills .skills-content .right .info{ display:flex; margin-bottom:6px; align-items:center; justify-content:space-between; }
   .skills .skills-content .right span{ font-weight:500; font-size:16px; }
@@ -146,12 +154,12 @@
   .projects{ color:#fff; background:#111; }
   .projects .title::before{ background:#fff; }
   .projects .title::after{ background:#111; content:"what i've built"; }
-  .projects .proj-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:24px; }
+  .projects .proj-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:24px; align-items:stretch; }
   .projects .card{
-    background:#1d1d1d; border-radius:6px; padding:30px 26px; text-align:left; overflow:hidden;
-    transition:all 0.3s ease; display:flex; flex-direction:column;
+    background:#1d1d1d; border-radius:6px; padding:32px 28px; text-align:left; overflow:hidden;
+    transition:all 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; display:flex; flex-direction:column; height:100%;
   }
-  .projects .card:hover{ background:crimson; }
+  .projects .card:hover{ background:crimson; transform:translateY(-6px); box-shadow:0 16px 32px rgba(0,0,0,0.35); }
   .projects .card .content{ display:flex; flex-direction:column; flex:1; min-height:0; }
   .projects .card .proj-preview{
     width:100%; aspect-ratio:16/9; border-radius:6px; overflow:hidden; margin-bottom:18px;
@@ -171,11 +179,15 @@
     padding:3px 10px; border-radius:4px; margin-bottom:14px; align-self:flex-start; transition:all 0.3s ease;
   }
   .projects .card:hover .status{ color:#fff; border-color:#fff; background:rgba(255,255,255,0.15); }
-  .projects .card .text{ font-size:21px; font-weight:600; margin-bottom:8px; }
+  .projects .card .text{ font-size:24px; font-weight:700; margin-bottom:10px; }
   .projects .card p{ color:#bbb; font-size:13.5px; line-height:1.65; transition:color 0.3s ease; }
   .projects .card:hover p{ color:#f4d5dc; }
   .projects .card .tags{ display:flex; flex-wrap:wrap; gap:6px; margin:16px 0; }
-  .projects .card .tags span{ font-size:10.5px; font-family:'Ubuntu',sans-serif; background:#111; color:#ccc; padding:4px 9px; border-radius:4px; }
+  .projects .card .tags span{
+    display:inline-flex; align-items:center; gap:6px; font-size:10.5px; font-family:'Ubuntu',sans-serif;
+    background:#111; color:#ccc; padding:5px 10px; border-radius:4px; transition:all 0.3s ease;
+  }
+  .projects .card .tags span i{ font-size:13px; }
   .projects .card:hover .tags span{ background:rgba(0,0,0,0.25); color:#fff; }
   .projects .card .proj-links{ display:flex; gap:14px; margin-top:auto; }
   .projects .card .proj-links a{ color:#fff; font-size:13px; font-family:'Ubuntu',sans-serif; border-bottom:1px solid transparent; }
@@ -227,9 +239,9 @@
   .right form .button-area button{
     color:#fff; display:flex; align-items:center; gap:8px; width:auto; padding:0 26px; height:47px;
     outline:none; font-size:16px; font-weight:500; border-radius:6px; cursor:pointer; background:crimson;
-    border:2px solid crimson; transition:all 0.3s ease; font-family:'Poppins',sans-serif;
+    border:2px solid crimson; transition:all 0.3s ease, transform 0.25s ease; font-family:'Poppins',sans-serif;
   }
-  .right form .button-area button:hover{ color:crimson; background:none; }
+  .right form .button-area button:hover{ color:crimson; background:none; transform:translateY(-3px); }
   .right form .button-area button:disabled{ opacity:0.6; cursor:default; }
   .right form .button-area button svg{ width:15px; height:15px; }
   .is-loading svg{ animation:spin 0.8s linear infinite; }
@@ -287,6 +299,8 @@
   html[data-theme="dark"] .skills .skills-content .left .text{ color:#f0f0f0; }
   html[data-theme="dark"] .skills .skills-content .left p{ color:#cfcfcf; }
   html[data-theme="dark"] .skills .skills-content .left .stack-tags span{ background:#1d1d1d; color:#ddd; }
+  html[data-theme="dark"] .devicon-github-original,
+  html[data-theme="dark"] .devicon-unity-original{ filter:invert(1); }
   html[data-theme="dark"] .skills .skills-content .right span{ color:#f0f0f0; }
   html[data-theme="dark"] .skills .skills-content .right .line{ background:#2a2a2a; }
   html[data-theme="dark"] .contact .contact-content .text{ color:#f0f0f0; }
@@ -380,7 +394,7 @@
   </section>
 
   <!-- ABOUT -->
-  <section class="about" id="about">
+  <section class="about reveal" id="about">
     <div class="max-width">
       <h2 class="title">About me</h2>
       <div class="about-content">
@@ -400,7 +414,7 @@
   </section>
 
   <!-- SERVICES -->
-  <section class="services" id="services">
+  <section class="services reveal" id="services">
     <div class="max-width">
       <h2 class="title">What I provide</h2>
       <div class="serv-content">
@@ -430,7 +444,7 @@
   </section>
 
   <!-- SKILLS -->
-  <section class="skills" id="skills">
+  <section class="skills reveal" id="skills">
     <div class="max-width">
       <h2 class="title">My skills</h2>
       <div class="skills-content">
@@ -438,8 +452,17 @@
           <div class="text">My technical skills & experience.</div>
           <p>I work across the stack — from styling and client-side interactivity, to server logic, to the database underneath it. Below is roughly how I'd rate my day-to-day fluency in each area, alongside the broader toolset I use regularly.</p>
           <div class="stack-tags">
-            <span>JavaScript</span><span>TypeScript</span><span>Python</span><span>C#</span><span>C++</span>
-            <span>Java</span><span>Objective-C</span><span>SQL</span><span>Git &amp; GitHub</span><span>Unity</span>
+            <span><i class="devicon-javascript-plain colored"></i>JavaScript</span>
+            <span><i class="devicon-typescript-plain colored"></i>TypeScript</span>
+            <span><i class="devicon-python-plain colored"></i>Python</span>
+            <span><i class="devicon-csharp-plain colored"></i>C#</span>
+            <span><i class="devicon-cplusplus-plain colored"></i>C++</span>
+            <span><i class="devicon-java-plain colored"></i>Java</span>
+            <span><i class="devicon-objectivec-plain colored"></i>Objective-C</span>
+            <span><i class="devicon-mysql-plain colored"></i>SQL</span>
+            <span><i class="devicon-git-plain colored"></i>Git</span>
+            <span><i class="devicon-github-original"></i>GitHub</span>
+            <span><i class="devicon-unity-original"></i>Unity</span>
           </div>
         </div>
         <div class="column right">
@@ -454,7 +477,7 @@
   </section>
 
   <!-- PROJECTS -->
-  <section class="projects" id="projects">
+  <section class="projects reveal" id="projects">
     <div class="max-width">
       <h2 class="title">My projects</h2>
       <div class="proj-grid">
@@ -465,8 +488,13 @@
             <span class="badge">Featured</span>
             <span class="status">Shipped</span>
             <div class="text">Free.Shelf</div>
-            <p>A free-games tracker that pulls this week's markdowns from Steam and Epic Games into one shelf — filter by store, sort newest/oldest/A→Z, with a live backend proxy and a sample-data fallback.</p>
-            <div class="tags"><span>JavaScript</span><span>Node.js</span><span>HTML/CSS</span></div>
+            <p>A free-games tracker pulling live markdowns from Steam and Epic Games into one searchable, filterable shelf.</p>
+            <div class="tags">
+              <span><i class="devicon-javascript-plain colored"></i>JavaScript</span>
+              <span><i class="devicon-nodejs-plain colored"></i>Node.js</span>
+              <span><i class="devicon-html5-plain colored"></i>HTML</span>
+              <span><i class="devicon-css3-plain colored"></i>CSS</span>
+            </div>
             <div class="proj-links">
               <a href="https://free-shelf.vercel.app/" target="_blank" rel="noopener">Visit site ↗</a>
               <a href="https://github.com/KienCanlubo/FreeShelf" target="_blank" rel="noopener">GitHub ↗</a>
@@ -479,8 +507,13 @@
           <div class="content">
             <span class="status">Shipped</span>
             <div class="text">Laundry Management System</div>
-            <p>A desktop application replacing manual, paper-based tracking at a small laundry business — customers, transactions, billing, inventory, and reporting, with role-based admin/staff access.</p>
-            <div class="tags"><span>C#</span><span>Windows Forms</span><span>.NET Framework</span><span>SQL Server</span></div>
+            <p>A desktop system replacing paper-based tracking at a small laundry business — customers, billing, inventory, and role-based access.</p>
+            <div class="tags">
+              <span><i class="devicon-csharp-plain colored"></i>C#</span>
+              <span><i class="devicon-windows8-original colored"></i>Windows Forms</span>
+              <span><i class="devicon-dotnetcore-plain colored"></i>.NET Framework</span>
+              <span><i class="devicon-microsoftsqlserver-plain colored"></i>SQL Server</span>
+            </div>
             <div class="proj-links">
               <a href="https://github.com/KienCanlubo/Herlene-s-Laundry-Management-System.git" target="_blank" rel="noopener">GitHub ↗</a>
             </div>
@@ -492,8 +525,12 @@
           <div class="content">
             <span class="status">Shipped</span>
             <div class="text">This Portfolio</div>
-            <p>The site you're on right now — built from scratch to put React/Next.js skills into an actual, working, deployed product instead of just a resume bullet point.</p>
-            <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+            <p>The site you're on right now — built from scratch as a real, deployed product, not just a resume bullet point.</p>
+            <div class="tags">
+              <span><i class="devicon-html5-plain colored"></i>HTML</span>
+              <span><i class="devicon-css3-plain colored"></i>CSS</span>
+              <span><i class="devicon-javascript-plain colored"></i>JavaScript</span>
+            </div>
             <div class="proj-links">
               <a href="https://github.com/KienCanlubo/portfolio" target="_blank" rel="noopener">GitHub ↗</a>
             </div>
@@ -505,7 +542,7 @@
   </section>
 
   <!-- CONTACT -->
-  <section class="contact" id="contact">
+  <section class="contact reveal" id="contact">
     <div class="max-width">
       <h2 class="title">Contact me</h2>
       <div class="contact-content">
@@ -626,6 +663,12 @@
     entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); barObserver.unobserve(e.target); } });
   }, { threshold: 0.3 });
   document.querySelectorAll('.skills .bars').forEach(el => barObserver.observe(el));
+
+  // fade-in sections as they enter the viewport
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in-view'); revealObserver.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
   // footer year
   document.getElementById('footerYear').textContent = new Date().getFullYear();
