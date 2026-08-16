@@ -77,6 +77,8 @@
   }
   @keyframes heroDrift{ from{ background-position:0% 30%; } to{ background-position:100% 70%; } }
   .home .max-width{ width:100%; display:flex; align-items:center; }
+  .home .home-content{ display:flex; align-items:center; justify-content:space-between; gap:50px; width:100%; }
+  .home .home-content .home-text{ max-width:600px; }
   .home .home-content .text-1{ font-size:24px; color:#ccc; }
   .home .home-content .text-2{ font-size:70px; font-weight:600; margin-left:-3px; }
   .home .home-content .text-3{ font-size:36px; margin:8px 0 4px; }
@@ -91,6 +93,13 @@
   .home .home-content a.ghost{ background:none; color:#fff; border-color:rgba(255,255,255,0.4); }
   .home .home-content a:hover{ color:crimson; background:none; transform:translateY(-3px); }
   .home .home-content a.ghost:hover{ color:#fff; background:crimson; border-color:crimson; }
+  .home .home-content .home-photo{ flex-shrink:0; }
+  .home .home-content .photo-ring{
+    height:320px; width:320px; border-radius:50%; overflow:hidden; position:relative;
+    border:4px solid crimson; background:#151517;
+    box-shadow:0 0 0 10px rgba(220,20,60,0.12), 0 25px 70px rgba(0,0,0,0.55);
+  }
+  .home .home-content .photo-ring img{ height:100%; width:100%; object-fit:cover; display:block; }
 
   /* ---------------- ABOUT ---------------- */
   .about .title::after{ content:"who i am"; }
@@ -334,6 +343,12 @@
     .navbar .menu.active{ left:0; }
     .navbar .menu li{ display:block; }
     .navbar .menu li a{ display:inline-block; margin:18px 0; font-size:24px; }
+    .home{ height:auto; min-height:100vh; padding:150px 0 60px; }
+    .home .home-content{ flex-direction:column-reverse; text-align:center; gap:36px; }
+    .home .home-content .home-text{ max-width:100%; }
+    .home .home-content .home-sub{ margin-left:auto; margin-right:auto; }
+    .home .home-content .btn-row{ justify-content:center; }
+    .home .home-content .photo-ring{ height:220px; width:220px; }
     .home .home-content .text-2{ font-size:58px; }
     .home .home-content .text-3{ font-size:30px; }
     .max-width{ max-width:930px; }
@@ -381,13 +396,20 @@
   <section class="home" id="home">
     <div class="max-width">
       <div class="home-content">
-        <div class="text-1">Hello, my name is</div>
-        <div class="text-2">Kien Canlubo</div>
-        <div class="text-3">And I'm a <span class="typing"></span></div>
-        <p class="home-sub">Information Technology graduate who builds full systems end-to-end — schema design, CRUD, role-based access, reporting — for problems real people actually have.</p>
-        <div class="btn-row">
-          <a href="#projects">View my work</a>
-          <a href="#contact" class="ghost">Hire me</a>
+        <div class="home-text">
+          <div class="text-1">Hello, my name is</div>
+          <div class="text-2">Kien Canlubo</div>
+          <div class="text-3">I'm a <span class="typing"></span></div>
+          <p class="home-sub">I build full-stack web apps, desktop systems, and database-driven tools — from schema design to a working, polished UI — for real problems, not just portfolio pieces.</p>
+          <div class="btn-row">
+            <a href="#projects">View my work</a>
+            <a href="#contact" class="ghost">Hire me</a>
+          </div>
+        </div>
+        <div class="home-photo">
+          <div class="photo-ring">
+            <img src="profile-photo.jpg" alt="Kien Canlubo">
+          </div>
         </div>
       </div>
     </div>
@@ -648,7 +670,7 @@
 
   // typing effect
   if(!reduced && window.Typed){
-    const roles = ["Software Developer", "Full-Stack Builder", "Problem Solver"];
+    const roles = ["Software Developer", "Full-Stack Developer", "Web Developer"];
     new Typed(".typing", { strings: roles, typeSpeed: 90, backSpeed: 50, loop: true });
     new Typed(".typing-2", { strings: roles, typeSpeed: 90, backSpeed: 50, loop: true });
   } else {
